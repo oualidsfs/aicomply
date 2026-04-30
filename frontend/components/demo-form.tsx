@@ -28,11 +28,7 @@ export function DemoForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
-
-    // Voor nu: gewoon 1 seconde wachten en succesvol melden
-    // Later: echte API call naar Supabase
     await new Promise((resolve) => setTimeout(resolve, 1000))
-
     console.log("Form submitted:", formData)
     setSubmitted(true)
     setLoading(false)
@@ -40,10 +36,10 @@ export function DemoForm() {
 
   if (submitted) {
     return (
-      <div className="max-w-md mx-auto rounded-2xl bg-white p-10 text-center ring-1 ring-slate-200 shadow-xl shadow-slate-900/5">
-        <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 ring-1 ring-emerald-100">
+      <div className="rounded-sm border border-neutral-200 bg-white p-10 text-center">
+        <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full border border-neutral-300">
           <svg
-            className="h-7 w-7 text-emerald-600"
+            className="h-5 w-5 text-neutral-900"
             viewBox="0 0 20 20"
             fill="currentColor"
             aria-hidden
@@ -55,10 +51,8 @@ export function DemoForm() {
             />
           </svg>
         </div>
-        <h3 className="text-2xl font-semibold tracking-tight text-slate-900">
-          Bedankt!
-        </h3>
-        <p className="mt-2 text-slate-600 leading-relaxed">
+        <h3 className="text-2xl font-semibold tracking-tight text-neutral-900">Bedankt</h3>
+        <p className="mt-2 text-neutral-600 leading-relaxed">
           We nemen binnen 24 uur contact op om uw demo in te plannen.
         </p>
       </div>
@@ -68,10 +62,13 @@ export function DemoForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto rounded-2xl bg-white p-8 ring-1 ring-slate-200 shadow-xl shadow-slate-900/5 space-y-5"
+      className="rounded-sm border border-neutral-200 bg-white p-8 space-y-6"
     >
-      <div className="space-y-1.5">
-        <Label htmlFor="name" className="text-sm font-medium text-slate-700">
+      <div className="space-y-2">
+        <Label
+          htmlFor="name"
+          className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-700"
+        >
           Naam
         </Label>
         <Input
@@ -82,13 +79,16 @@ export function DemoForm() {
           value={formData.name}
           onChange={handleChange}
           placeholder="Jan Janssens"
-          className="h-11 border-slate-200 focus-visible:ring-slate-900/10 focus-visible:border-slate-900"
+          className="h-11 rounded-sm border-neutral-300 bg-white focus-visible:ring-1 focus-visible:ring-neutral-900 focus-visible:border-neutral-900"
         />
       </div>
 
-      <div className="space-y-1.5">
-        <Label htmlFor="email" className="text-sm font-medium text-slate-700">
-          Email
+      <div className="space-y-2">
+        <Label
+          htmlFor="email"
+          className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-700"
+        >
+          Zakelijk e-mailadres
         </Label>
         <Input
           id="email"
@@ -98,12 +98,15 @@ export function DemoForm() {
           value={formData.email}
           onChange={handleChange}
           placeholder="jan@bedrijf.be"
-          className="h-11 border-slate-200 focus-visible:ring-slate-900/10 focus-visible:border-slate-900"
+          className="h-11 rounded-sm border-neutral-300 bg-white focus-visible:ring-1 focus-visible:ring-neutral-900 focus-visible:border-neutral-900"
         />
       </div>
 
-      <div className="space-y-1.5">
-        <Label htmlFor="company" className="text-sm font-medium text-slate-700">
+      <div className="space-y-2">
+        <Label
+          htmlFor="company"
+          className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-700"
+        >
           Bedrijf
         </Label>
         <Input
@@ -114,7 +117,7 @@ export function DemoForm() {
           value={formData.company}
           onChange={handleChange}
           placeholder="Mijn Bedrijf BV"
-          className="h-11 border-slate-200 focus-visible:ring-slate-900/10 focus-visible:border-slate-900"
+          className="h-11 rounded-sm border-neutral-300 bg-white focus-visible:ring-1 focus-visible:ring-neutral-900 focus-visible:border-neutral-900"
         />
       </div>
 
@@ -122,13 +125,17 @@ export function DemoForm() {
         type="submit"
         size="lg"
         disabled={loading}
-        className="w-full bg-slate-900 hover:bg-slate-800 shadow-lg shadow-slate-900/10"
+        className="w-full rounded-sm bg-neutral-900 hover:bg-neutral-800"
       >
-        {loading ? "Bezig met versturen..." : "Boek mijn demo"}
+        {loading ? "Bezig met versturen…" : "Boek mijn demo"}
       </Button>
 
-      <p className="text-center text-xs text-slate-500">
-        Door te versturen gaat u akkoord met onze privacyvoorwaarden.
+      <p className="text-xs text-neutral-500 leading-relaxed">
+        Door te versturen gaat u akkoord met onze{" "}
+        <a href="#" className="underline underline-offset-2 hover:text-neutral-900">
+          privacyvoorwaarden
+        </a>
+        . Wij verkopen uw gegevens niet.
       </p>
     </form>
   )
